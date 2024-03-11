@@ -66,7 +66,8 @@ public class Piece {
      * @param col   The column to move the piece to.
      */
     public void setPosition(int row, int col) {
-
+        this.row = row;
+        this.col = col;
     }
 
     /**
@@ -74,7 +75,7 @@ public class Piece {
      * @return  The color of the piece.
      */
     public boolean getIsBlack() {
-        return false;
+        return isBlack;
     }
 
     /**
@@ -92,7 +93,7 @@ public class Piece {
      * @return  A string representation of the piece.
      */
     public String toString() {
-        return "";
+        return String.valueOf(character);
     }
 
 

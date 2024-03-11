@@ -79,17 +79,31 @@ public class Board {
     }
 
     // Movement helper functions
-
-    //TODO:
-    // Ensure that the player's chosen move is even remotely legal.
-    // Returns a boolean to signify whether:
-    // - 'start' and 'end' fall within the array's bounds.
-    // - 'start' contains a Piece object, i.e., not null.
-    // - Player's color and color of 'start' Piece match.
-    // - 'end' contains either no Piece or a Piece of the opposite color.
-    // - where 'start' = (startRow, startCol) and 'end' = (endRow, endCol)
     public boolean verifySourceAndDestination(int startRow, int startCol, int endRow, int endCol, boolean isBlack) {
-        return false;
+        //Check to see if 'start' and 'end' fall within the array's bounds.
+        if (startRow < 0 || startRow >= 8 || startCol < 0 || startCol <= 8 || endRow < 0 || endRow >= 8 || endCol < 0 || endCol >= 8) {
+            return false;
+        }
+
+        //Check to see if 'start' contains a Piece object
+        Piece startPiece = getPiece(startRow, startCol);
+        if (startPiece == null) {
+            return false;
+        }
+
+        //Check to see if Player's color and color of 'start' Piece match
+        if (startPiece.getIsBlack() != isBlack) {
+            return false;
+        }
+
+        //Check to see if 'end' contains either no Piece or a Piece of the opposite color
+        Piece endPiece = getPiece(endRow, endCol);
+        if (endPiece != null || endPiece.getIsBlack() == isBlack) {
+            return false;
+        }
+
+        //If all checks pass
+        return true;
     }
 
     //TODO:
