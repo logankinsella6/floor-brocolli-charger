@@ -78,6 +78,7 @@ public class Board {
         }
     }
 
+
     // Movement helper functions
     public boolean verifySourceAndDestination(int startRow, int startCol, int endRow, int endCol, boolean isBlack) {
         //Check to see if 'start' and 'end' fall within the array's bounds.
@@ -98,7 +99,7 @@ public class Board {
 
         //Check to see if 'end' contains either no Piece or a Piece of the opposite color
         Piece endPiece = getPiece(endRow, endCol);
-        if (endPiece != null || endPiece.getIsBlack() == isBlack) {
+        if (endPiece != null && endPiece.getIsBlack() == isBlack) {
             return false;
         }
 
@@ -106,36 +107,77 @@ public class Board {
         return true;
     }
 
-    //TODO:
-    // Check whether the 'start' position and 'end' position are adjacent to each other
     public boolean verifyAdjacent(int startRow, int startCol, int endRow, int endCol) {
-        return false;
+        //Calculate the absolute difference between row and column coordinates
+        int rowDiff = Math.abs(startRow - endRow);
+        int colDiff = Math.abs(startCol - endCol);
+
+        // Check to see if adjacent
+        return ((rowDiff == 1 && colDiff == 0) || (rowDiff == 0 && colDiff == 1));
     }
 
-    //TODO:
-    // Checks whether a given 'start' and 'end' position are a valid horizontal move.
-    // Returns a boolean to signify whether:
-    // - The entire move takes place on one row.
-    // - All spaces directly between 'start' and 'end' are empty, i.e., null.
     public boolean verifyHorizontal(int startRow, int startCol, int endRow, int endCol) {
-        return false;
+        // Check if the move takes place on one row
+        if (startRow != endRow) {
+            return false;
+        }
+
+        // Determine the direction of movement (left or right)
+        int direction = Integer.compare(endCol, startCol);
+
+        // Iterate over spaces between 'start' and 'end'
+        for (int col = startCol + direction; col != endCol; col += direction) {
+            if (getPiece(startRow, col) != null) {
+                return false; // A piece exists in between 'start' and 'end'
+            }
+        }
+
+        return true; // All spaces between 'start' and 'end' are empty
     }
 
-    //TODO:
-    // Checks whether a given 'start' and 'end' position are a valid vertical move.
-    // Returns a boolean to signify whether:
-    // - The entire move takes place on one column.
-    // - All spaces directly between 'start' and 'end' are empty, i.e., null.
     public boolean verifyVertical(int startRow, int startCol, int endRow, int endCol) {
-        return false;
+        // Check if the move takes place on one column
+        if (startCol != endCol) {
+            return false;
+        }
+
+        // Determine the direction of movement (up or down)
+        int direction = Integer.compare(endRow, startRow);
+
+        // Iterate over spaces between 'start' and 'end'
+        for (int row = startRow + direction; row != endRow; row += direction) {
+            if (getPiece(row, startCol) != null) {
+                return false; // A piece exists in between 'start' and 'end'
+            }
+        }
+
+        return true; // All spaces between 'start' and 'end' are empty
     }
 
-    //TODO:
-    // Checks whether a given 'start' and 'end' position are a valid diagonal move.
-    // Returns a boolean to signify whether:
-    // - The path from 'start' to 'end' is diagonal... change in row and col.
-    // - All spaces directly between 'start' and 'end' are empty, i.e., null.
     public boolean verifyDiagonal(int startRow, int startCol, int endRow, int endCol) {
-        return false;
+        // Calculate the absolute differences between row and column coordinates
+        int rowDiff = Math.abs(endRow - startRow);
+        int colDiff = Math.abs(endCol - startCol);
+
+        // Check if the move is diagonal (both row and column changes)
+        if (rowDiff != colDiff) {
+            return false;
+        }
+
+        // Determine the direction of movement (up-right, up-left, down-right, down-left)
+        int rowDirection = Integer.compare(endRow, startRow);
+        int colDirection = Integer.compare(endCol, startCol);
+
+        // Iterate over spaces between 'start' and 'end'
+        for (int i = 1; i < rowDiff; i++) {
+            int row = startRow + i * rowDirection;
+            int col = startCol + i * colDirection;
+            if (getPiece(row, col) != null) {
+                return false; // A piece exists in between 'start' and 'end'
+            }
+        }
+
+        return true; // All spaces between 'start' and 'end' are empty
     }
+
 }
