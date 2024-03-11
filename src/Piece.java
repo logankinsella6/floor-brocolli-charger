@@ -22,6 +22,7 @@ public class Piece {
         this.isBlack = isBlack;
     }
 
+
     /**
      * Determines if moving this piece is legal.
      * @param board     The current state of the board.
@@ -60,6 +61,7 @@ public class Piece {
         }
     }
 
+
     /**
      * Sets the position of the piece.
      * @param row   The row to move the piece to.
@@ -70,6 +72,7 @@ public class Piece {
         this.col = col;
     }
 
+
     /**
      * Return the color of the piece.
      * @return  The color of the piece.
@@ -78,13 +81,52 @@ public class Piece {
         return isBlack;
     }
 
+
     /**
      * Handle promotion of a pawn.
      * @param row Current row of the pawn
      * @param isBlack Color of the pawn
      */
     public void promotePawn(int row, boolean isBlack) {
+        // Check if the pawn has reached the opposite end of the board
+        if ((isBlack && row == 0) || (!isBlack && row == 7)) {
+            Scanner scanner = new Scanner(System.in);
+            String pieceName;
+            boolean validPiece = false;
 
+            // Keep prompting the user until a valid piece name is entered
+            while (!validPiece) {
+                System.out.println("Your pawn can be promoted! Enter the name of the piece you want to promote it to (excluding king): ");
+                pieceName = scanner.nextLine().toLowerCase();
+
+                // Set the character of the piece based on the user input
+                switch (pieceName) {
+                    case "pawn":
+                        character = isBlack ? '\u2659' : '\u265f';
+                        validPiece = true;
+                        break;
+                    case "rook":
+                        character = isBlack ? '\u2656' : '\u265c';
+                        validPiece = true;
+                        break;
+                    case "knight":
+                        character = isBlack ? '\u2658' : '\u265e';
+                        validPiece = true;
+                        break;
+                    case "bishop":
+                        character = isBlack ? '\u2657' : '\u265d';
+                        validPiece = true;
+                        break;
+                    case "queen":
+                        character = isBlack ? '\u2655' : '\u265b';
+                        validPiece = true;
+                        break;
+                    default:
+                        System.out.println("Invalid piece name. Please enter a valid piece name.");
+                        break;
+                }
+            }
+        }
     }
 
 
@@ -95,6 +137,4 @@ public class Piece {
     public String toString() {
         return String.valueOf(character);
     }
-
-
 }
