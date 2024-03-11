@@ -61,7 +61,6 @@ public class Piece {
         }
     }
 
-
     /**
      * Sets the position of the piece.
      * @param row   The row to move the piece to.
@@ -72,7 +71,6 @@ public class Piece {
         this.col = col;
     }
 
-
     /**
      * Return the color of the piece.
      * @return  The color of the piece.
@@ -80,7 +78,6 @@ public class Piece {
     public boolean getIsBlack() {
         return isBlack;
     }
-
 
     /**
      * Handle promotion of a pawn.
@@ -128,7 +125,6 @@ public class Piece {
             }
         }
     }
-
 
     /**
      * Returns a string representation of the piece.

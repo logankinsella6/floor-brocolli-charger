@@ -179,5 +179,4 @@ public class Board {
 
         return true; // All spaces between 'start' and 'end' are empty
     }
-
 }
