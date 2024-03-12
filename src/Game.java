@@ -9,7 +9,7 @@ public class Game {
         Board board = new Board();
         System.out.println(board.toString());
         Scanner s = new Scanner(System.in);
-        while (board.isGameOver() == false) {
+        while (!board.isGameOver()) {
             System.out.println("It is currently white's turn to play");
             System.out.println("What is your move? (format: [start row] [start column] [end row] [end column]");
             input = s.nextLine();
