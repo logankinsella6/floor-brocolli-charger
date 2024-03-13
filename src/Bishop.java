@@ -14,7 +14,7 @@ public class Bishop {
         // Check if the move is diagonal
         if (Math.abs(row - endRow) == Math.abs(col - endCol)) {
             // Check if the path is clear
-            if (verifyDiagonal(board, endRow, endCol)) {
+            if (board.verifyDiagonal(this.row, this.col, endRow, endCol)) {
                 // Check if the destination is empty or occupied by an opponent's piece
                 Piece endPiece = board.getPiece(endRow, endCol);
                 return endPiece == null || endPiece.getIsBlack() != isBlack;
