@@ -1,4 +1,4 @@
-// Written by Logan Kinsella, kinse124
+// Written by Logan Kinsella, kinse124 and Aaron Siddiky, siddi186
 public class Board {
     // Instance variables
     private Piece[][] board;
