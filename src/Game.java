@@ -1,4 +1,4 @@
-// Written by Logan Kinsella, kinse124
+// Written by Logan Kinsella, kinse124 and Aaron Siddiky, siddi186
 import java.util.Scanner;
 
 public class Game {
