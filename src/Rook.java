@@ -1,4 +1,4 @@
-// Written by Logan Kinsella, kinse124
+// Written by Logan Kinsella, kinse124, Aaron Siddiky, siddi186
 public class Rook {
     private int row;
     private int col;
