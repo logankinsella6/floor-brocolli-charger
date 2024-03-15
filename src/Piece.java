@@ -131,6 +131,6 @@ public class Piece {
      * @return  A string representation of the piece.
      */
     public String toString() {
-        return String.valueOf(character);
+        return this.character + "";
     }
 }

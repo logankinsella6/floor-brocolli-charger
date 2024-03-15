@@ -24,8 +24,9 @@ public class Board {
     public boolean movePiece(int startRow, int startCol, int endRow, int endCol) {
         Piece piece = board[startRow][startCol];
         if (piece.isMoveLegal(this, endRow, endCol)) {
-            board[endRow][endCol] = board[startRow][startCol];
+            board[startRow][startCol].setPosition(endRow, endCol);
             board[startRow][startCol] = null;
+            this.setPiece(endRow,endCol,piece);
             return true;
         } else {
             return false;
@@ -82,7 +83,7 @@ public class Board {
     // Movement helper functions
     public boolean verifySourceAndDestination(int startRow, int startCol, int endRow, int endCol, boolean isBlack) {
         //Check to see if 'start' and 'end' fall within the array's bounds.
-        if (startRow < 0 || startRow >= 8 || startCol < 0 || startCol <= 8 || endRow < 0 || endRow >= 8 || endCol < 0 || endCol >= 8) {
+        if (startRow < 0 || startRow >= 8 || startCol < 0 || startCol >= 8 || endRow < 0 || endRow >= 8 || endCol < 0 || endCol >= 8) {
             return false;
         }
 
@@ -113,7 +114,7 @@ public class Board {
         int colDiff = Math.abs(startCol - endCol);
 
         // Check to see if adjacent
-        return ((rowDiff == 1 && colDiff == 0) || (rowDiff == 0 && colDiff == 1));
+        return (rowDiff <= 1 && colDiff <= 1);
     }
 
     public boolean verifyHorizontal(int startRow, int startCol, int endRow, int endCol) {
